@@ -1,7 +1,5 @@
 package com.devsuperior.dslearnbds.entities;
 
-import com.devsuperior.dslearnbds.Reply;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
