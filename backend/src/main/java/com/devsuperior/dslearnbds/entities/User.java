@@ -1,11 +1,13 @@
 package com.devsuperior.dslearnbds.entities;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_user")
@@ -32,6 +34,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public User(Long id, String name, String email, String password) {
+        super();
         this.id = id;
         this.name = name;
         this.email = email;
@@ -64,7 +67,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority())).collect(Collectors.toList());
     }
 
     public String getPassword() {
